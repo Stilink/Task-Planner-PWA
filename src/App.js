@@ -4,6 +4,9 @@ import './App.css';
 import SingIn from './components/login/Login';
 import ResponsiveDrawer from './components/navigationDrawer/NavigationDrawer';
 import OutlinedCard from './components/cards/Cards';
+import NewTask from './components/newTask/NewTask';
+import SignUp from './components/signUp/SignUp';
+import Filter from './components/filter/Filter';
 
 const info = {
     "description": "some description text ",
@@ -18,9 +21,12 @@ const info = {
 function App() {
   return (
     <div className="App">
-      <SingIn />
+      {/*<SingIn />
       <ResponsiveDrawer />
       <OutlinedCard {...info} />
+      <NewTask />
+      <SignUp />*/}
+      <Filter />
     </div>
   );
 }
