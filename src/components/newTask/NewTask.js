@@ -24,21 +24,36 @@ const useStyles = makeStyles((theme) => ({
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
-      },
+    },
 }));
 
 
-export default function NewTask() {
-    const [option, setOption] = React.useState('');
+export default function NewTask(props) {
+    const [state, setState] = React.useState('');
     const [date, setDate] = React.useState('');
+    const [description, setDescription] = React.useState('');
+    const [responsible, setResponsible] = React.useState('');
     const classes = useStyles();
+    const handleSubmit = () => {
+        
+        let variable = {
+            "description": description,
+            "responsible": {
+                "name": localStorage.getItem('name'),
+                "email": localStorage.getItem('email'),
+            },
+            "status": state,
+            "dueDate": date
+        }
+        props.func(variable);
+    };
     return (
         <Container component="main" maxWidth="xs">
             <div className={classes.paper}>
                 <Typography component="h1" variant="h5">
                     New task
                 </Typography>
-                <form className={classes.form} noValidate>
+                <form className={classes.form} onSubmit={handleSubmit}>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -48,6 +63,9 @@ export default function NewTask() {
                         label="Description"
                         name="description"
                         autoFocus
+                        onChange={(e) => {
+                            setDescription(e.target.value);
+                        }}
                     />
                     <TextField
                         variant="outlined"
@@ -57,14 +75,17 @@ export default function NewTask() {
                         id="responsible"
                         label="Responsible"
                         name="responsible"
+                        onChange={(e) => {
+                            setResponsible(e.target.value);
+                        }}
                     />
                     <br />
                     <Select
                         native
-                        value={option}
+                        value={state}
                         fullWidth
                         onChange={(e) => {
-                            setOption(e.target.value);
+                            setState(e.target.value);
                         }}
                     >
                         <option aria-label="None" value="" />
@@ -81,6 +102,9 @@ export default function NewTask() {
                         defaultValue="2020-09-17"
                         fullWidth
                         className={classes.textField}
+                        onChange={(e) => {
+                            setDate(e.target.value);
+                        }}
                     />
                     <Button
                         type="submit"

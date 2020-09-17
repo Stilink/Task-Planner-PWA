@@ -54,6 +54,8 @@ function ResponsiveDrawer(props) {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
+  const name = localStorage.getItem('name');
+  const email = localStorage.getItem('email');
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -64,10 +66,10 @@ function ResponsiveDrawer(props) {
       <Divider />
       <List>
         <ListItem>
-            <Avatar alt="Santiago Carrillo">SC </Avatar>
-            <ListItemText primary={'Santiago Carrillo'} />
+            <Avatar alt={name}>SC </Avatar>
+            <ListItemText primary={name} />
         </ListItem>
-        {['sancarbar@gmail'].map((text, index) => (
+        {[email].map((text, index) => (
           <ListItem button key={text}>
             <ListItemText primary={text} />
           </ListItem>

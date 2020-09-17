@@ -1,32 +1,41 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import SingIn from './components/login/Login';
+import SignIn from './components/login/Login';
 import ResponsiveDrawer from './components/navigationDrawer/NavigationDrawer';
 import OutlinedCard from './components/cards/Cards';
 import NewTask from './components/newTask/NewTask';
-import SignUp from './components/signUp/SignUp';
+import SignUp from './components/user/User';
 import Filter from './components/filter/Filter';
+import Principal from "./Principal";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-const info = {
-    "description": "some description text ",
-    "responsible": {
-      "name": "Santiago Carrillo",
-      "email": "sancarbar@gmail"
-    },
-    "status": "ready",
-    "dueDate": 156464645646
-  };
+
+
+
 
 function App() {
+  localStorage.setItem('email', "sancarbar@gmail");
+  localStorage.setItem('name', "Santiago Carrillo");
+  localStorage.setItem('password', "password");
+  const main = () => {
+    let flag = localStorage.getItem('isLoggedIn');
+    if (flag) {
+      return <Principal />;
+    } else {
+      return <SignIn />;
+    }
+  }
   return (
     <div className="App">
-      {/*<SingIn />
-      <ResponsiveDrawer />
-      <OutlinedCard {...info} />
-      <NewTask />
-      <SignUp />*/}
-      <Filter />
+      <Router>
+        <Switch>
+          <Route path="/" exact component={main} />
+          <Route path="/newTask" exact component={NewTask} />
+          <Route path="/filter" exact component={Filter} />
+          <Route path="/userProfile" exact component={SignUp} />
+        </Switch>
+      </Router>
     </div>
   );
 }

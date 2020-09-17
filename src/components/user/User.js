@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SignUp(props) {
+export default function UserProfile(props) {
 
     const classes = useStyles();
     const [user, setUser] = useState(null);
@@ -62,7 +62,7 @@ export default function SignUp(props) {
                     <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5" style={{color: 'black'}}>
-                    Sign Up
+                    User Profile
                 </Typography>
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
@@ -124,15 +124,8 @@ export default function SignUp(props) {
                         color="primary"
                         className={classes.submit}
                     >
-                        Sign Up
+                        Update
                     </Button>
-                    <Grid container justify="flex-end">
-                        <Grid item>
-                            <Link href={"/signin"} variant="body2">
-                                Already have an account?
-                            </Link>
-                        </Grid>
-                    </Grid>
                 </form>
             </div>
         </Container>
