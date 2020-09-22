@@ -4,9 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Select from '@material-ui/core/Select';
 
@@ -18,10 +16,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Filter() {
+export default function Filter(props) {
     const classes = useStyles();
 
     const [option, setOption] = React.useState('');
+    const [dueDate, setDueDate] = React.useState('');
+    const [responsible, setResponsible] = React.useState('');
     const [open, setOpen] = React.useState(false);
     const [textField, setTextField] = React.useState('');
 
@@ -33,7 +33,8 @@ export default function Filter() {
         setOpen(false);
     };
 
-    const handleSendReport = () => {
+    const handleFilter = () => {
+        props.filterFunc(dueDate, option, responsible);
         setOpen(false);
     };
 
@@ -52,15 +53,21 @@ export default function Filter() {
                         defaultValue="2020-09-17"
                         fullWidth
                         className={classes.textField}
+                        onChange={(e) => {
+                            setDueDate(e.target.value);
+                        }}
                     />
                     <TextField
                         variant="outlined"
                         margin="normal"
                         required
                         fullWidth
-                        id="responsible"
+                        id="responsibleFilter"
                         label="Responsible"
                         name="responsible"
+                        onChange={(e) => {
+                            setResponsible(e.target.value);
+                        }}
                     />
                     <Select
                         native
@@ -80,7 +87,7 @@ export default function Filter() {
                     <Button onClick={handleClose} color="primary">
                         Clear all
                     </Button>
-                    <Button onClick={handleSendReport} color="primary">
+                    <Button onClick={handleFilter} color="primary">
                         Apply
                     </Button>
                 </DialogActions>

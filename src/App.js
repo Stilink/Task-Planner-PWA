@@ -1,9 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import SignIn from './components/login/Login';
-import ResponsiveDrawer from './components/navigationDrawer/NavigationDrawer';
-import OutlinedCard from './components/cards/Cards';
 import NewTask from './components/newTask/NewTask';
 import SignUp from './components/user/User';
 import Filter from './components/filter/Filter';

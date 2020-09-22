@@ -30,22 +30,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NewTask(props) {
     const [state, setState] = React.useState('');
-    const [date, setDate] = React.useState('');
+    const [date, setDate] = React.useState('2020-09-17');
     const [description, setDescription] = React.useState('');
     const [responsible, setResponsible] = React.useState('');
     const classes = useStyles();
     const handleSubmit = () => {
-        
         let variable = {
             "description": description,
             "responsible": {
-                "name": localStorage.getItem('name'),
+                "name": responsible,
                 "email": localStorage.getItem('email'),
             },
             "status": state,
-            "dueDate": date
+            "dueDate": new Date(date)
         }
-        props.func(variable);
+        props.addFunc(variable);
     };
     return (
         <Container component="main" maxWidth="xs">
@@ -53,7 +52,7 @@ export default function NewTask(props) {
                 <Typography component="h1" variant="h5">
                     New task
                 </Typography>
-                <form className={classes.form} onSubmit={handleSubmit}>
+                <form className={classes.form}>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -107,11 +106,11 @@ export default function NewTask(props) {
                         }}
                     />
                     <Button
-                        type="submit"
                         fullWidth
                         variant="contained"
                         color="primary"
                         className={classes.submit}
+                        onClick={handleSubmit}
                     >
                         New task
                 </Button>
